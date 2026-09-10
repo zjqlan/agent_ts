@@ -1,0 +1,8 @@
+{
+  "name": "zypg-edupaper-runner",
+  "private": true,
+  "description": "Local runner for mcpworld edupaper-mcp (stdio generate_exam_paper)",
+  "dependencies": {
+    "edupaper-mcp": "1.0.6"
+  }
+}

@@ -1,0 +1,36 @@
+services:
+  mysql:
+    image: mysql:8.0.43
+    container_name: zypg-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: zypg
+      MYSQL_DATABASE: zypg
+      MYSQL_USER: zypg
+      MYSQL_PASSWORD: zypg
+    ports:
+      - "3307:3306"
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uzypg", "-pzypg"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7.2
+    container_name: zypg-redis
+    restart: unless-stopped
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  mysql_data:
