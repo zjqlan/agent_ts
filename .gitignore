@@ -2,6 +2,10 @@
 .env.*
 !.env.example
 
+htmlcov/
+.coverage
+coverage.xml
+
 .venv/
 venv/
 __pycache__/
